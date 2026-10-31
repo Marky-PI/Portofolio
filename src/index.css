@@ -1,0 +1,129 @@
+@import "tailwindcss";
+@import "../public/scrollcraft/scrollcraft.css" layer(base);
+
+@theme {
+  --font-display: "Montserrat", "Helvetica Neue", Helvetica, sans-serif;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* Scroll-Craft Token Floor — Monochrome Clinical Editorial */
+html {
+  scroll-behavior: auto;
+}
+
+:root {
+  --sc-canvas: #0B0B0D;
+  --sc-surface: #141418;
+  --sc-ink: #F4F4F5;
+  --sc-ink-soft: #A1A1AA;
+  --sc-accent: #F4F4F5;
+  --sc-accent-ink: #09090B;
+  --sc-font-display: "Montserrat", "Helvetica Neue", Helvetica, sans-serif;
+  --sc-font-text: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --sc-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html:not(.dark) {
+  --sc-canvas: #E5E5E5;
+  --sc-surface: #FFFFFF;
+  --sc-ink: #18181B;
+  --sc-ink-soft: #52525B;
+  --sc-accent: #18181B;
+  --sc-accent-ink: #FAFAFA;
+  color: var(--sc-ink);
+}
+
+/* Ensure dynamically filtered React children inside an already-revealed stagger container remain visible */
+[data-sc-stagger].sc-in > * {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Prevent global img max-width from shrinking dimensional hero planes on mobile */
+.sc-hero-portrait {
+  max-width: none;
+}
+
+/* Pan rail item staggered settle driven from --sc-p */
+@media (prefers-reduced-motion: no-preference) {
+  .sc-pan-card {
+    opacity: calc(0.75 + 0.25 * var(--sc-p, 1));
+  }
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  flex: 0 0 max-content;
+  width: max-content;
+  min-width: max-content;
+  animation: marquee-left var(--marquee-duration, 26s) linear infinite !important;
+  animation-play-state: running !important;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.animate-marquee-right {
+  display: flex;
+  flex: 0 0 max-content;
+  width: max-content;
+  min-width: max-content;
+  animation: marquee-right var(--marquee-duration, 32s) linear infinite !important;
+  animation-play-state: running !important;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.marquee-paused {
+  animation-play-state: paused !important;
+}
+
+/* Outlined display typography matching reference image.png */
+.stroke-text-light {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(20, 20, 22, 0.82);
+}
+
+.stroke-text-light-overlay {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(20, 20, 22, 0.55);
+}
+
+.stroke-text-dark {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(244, 244, 245, 0.78);
+}
+
+.stroke-text-dark-overlay {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(244, 244, 245, 0.45);
+}
+
+/* UI/UX Pro Max Ergonomics: eliminate 300ms mobile tap delay on interactive controls */
+button,
+a,
+[role="button"],
+input,
+textarea {
+  touch-action: manipulation;
+}
